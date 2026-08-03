@@ -3,7 +3,7 @@ general:
 
 training:
   model_id: "Qwen/Qwen2-VL-2B-Instruct"
-  train_csv: "/content/data/barbados-ocr-data/train_small.csv"
+  train_csv: "/content/data/barbados-ocr-data/Train.csv"
   base_image_dir: "/content/data/images"
   output_dir: "./Qwen2-VL-2B-ocr"
   per_device_train_batch_size: 8
