@@ -149,6 +149,7 @@ def run_training(
     append=None,
     load_hyper_parameters=False,
     resize=None,
+    learning_rate=None,
 ):
     cfg = load_config(config_path)
     cfg_train = cfg.get("training", {})
@@ -176,6 +177,7 @@ def run_training(
     log_dir = log_dir or cfg_train.get("log_dir", "code/scripts/Kraken-OCR/training_logs")
     format_type = format_type or cfg_train.get("format_type", "path")
     force_binarization = force_binarization if force_binarization is not None else cfg_train.get("force_binarization", False)
+    learning_rate = learning_rate or cfg_train.get("learning_rate", None)
 
     train_csv = resolve(train_csv, repo_root)
     base_image_dir = resolve(base_image_dir, repo_root)
@@ -219,6 +221,9 @@ def run_training(
     if spec is not None:
         args.extend(["-s", spec])
 
+    if learning_rate is not None:
+        args.extend(["-r", str(learning_rate)])
+
     if load_model is not None:
         args.extend(["-i", load_model])
         if load_hyper_parameters:
@@ -255,6 +260,7 @@ if __name__ == "__main__":
     parser.add_argument("--load_model", default=None, help="Path or Zenodo DOI ID of pretrained model to continue training")
     parser.add_argument("--append", type=int, default=None, help="Remove layers before argument and then append spec to loaded model")
     parser.add_argument("--load_hyper_parameters", action="store_true", help="Load hyperparameters from the pretrained model")
+    parser.add_argument("--learning_rate", type=float, default=None, help="Learning rate (-r flag). Lower it when fine-tuning a pretrained model, e.g. 1e-4")
     parser.add_argument("--train_csv", default=None, help="Override train CSV path")
     parser.add_argument("--base_image_dir", default=None, help="Override base image directory")
     args = parser.parse_args()
@@ -276,4 +282,5 @@ if __name__ == "__main__":
         append=args.append,
         load_hyper_parameters=args.load_hyper_parameters,
         resize=args.resize,
+        learning_rate=args.learning_rate,
     )
