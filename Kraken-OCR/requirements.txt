@@ -1,11 +1,11 @@
-pandas>=2.0
+pandas
 pyyaml
 Pillow
 numpy
 evaluate
 jiwer
 tqdm
-torch>=2.0.0,<3.0
-scipy>=1.14.1
-shapely>=2.1.0
-scikit-learn>=1.6
+torch
+scipy
+shapely
+scikit-learn
