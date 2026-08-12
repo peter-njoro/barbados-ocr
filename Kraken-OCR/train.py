@@ -10,6 +10,8 @@ from pathlib import Path
 import pandas as pd
 import yaml
 
+from image_resolve import build_image_path
+
 
 def resolve(path, base):
     if os.path.isabs(path):
@@ -48,10 +50,6 @@ def get_record_id(row):
 
 def get_record_text(row):
     return clean_output(row.get("Target", row.get("text", row.get("label", ""))))
-
-
-def build_image_path(base_dir, record_id):
-    return os.path.join(base_dir, f"{record_id}.jpg")
 
 
 def prepare_training_data(csv_path, base_image_dir, train_data_dir, max_samples=None):

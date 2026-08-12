@@ -16,6 +16,8 @@ from kraken.pageseg import segment
 from kraken.rpred import rpred as kraken_rpred
 import torch
 
+from image_resolve import build_image_path
+
 
 def resolve(path, base):
     if os.path.isabs(path):
@@ -43,10 +45,6 @@ def get_record_id(row):
         return ""
     value = str(value).strip()
     return "" if value.lower() == "nan" else value
-
-
-def build_image_path(base_dir, record_id):
-    return os.path.join(base_dir, f"{record_id}.jpg")
 
 
 def clean_output(text: str) -> str:
