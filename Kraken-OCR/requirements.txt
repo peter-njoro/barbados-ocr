@@ -1,3 +1,4 @@
+kraken==6.0.3
 pandas
 pyyaml
 Pillow
